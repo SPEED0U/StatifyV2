@@ -5,6 +5,8 @@ const settings = require("../config.json");
 
 let countMaxOnline, datePlayerPeak, timestamp, date
 
+console.log(hello)
+
 // Modules.
 // module.exports = (client, con) => {
 //     const channel = client.channels.cache.get(settings.channel.status)

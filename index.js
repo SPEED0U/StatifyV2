@@ -7,9 +7,20 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
 
+const eventsPath = path.join(__dirname, 'events');
 const commandsPath = path.join(__dirname, 'commands');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     commands.push(command.data.toJSON());
@@ -41,7 +52,6 @@ for (const file of commandFiles) {
     }
 }
 
-
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -58,10 +68,6 @@ client.on(Events.InteractionCreate, async interaction => {
         console.error(error);
         await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
     }
-});
-
-client.once(Events.ClientReady, c => {
-    console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
 client.login(bot.token);
