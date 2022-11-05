@@ -78,7 +78,7 @@ module.exports = {
 							embeds: [embed],
 						});
 					})
-			} else interaction.reply({ content: "Couldn't find a driver called **`" + interaction.options.getString('driver') + "**` in database.", ephemeral: true });
+			} else interaction.reply({ content: "Couldn't find a driver called **`" + interaction.options.getString('driver') + "`** in database.", ephemeral: true });
 		})
 	},
 };
