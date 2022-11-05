@@ -29,7 +29,7 @@ module.exports = {
 				.setDescription('The driver that will lose money.')
 				.setRequired(true)),
 
-	async execute(interaction, client) {
+	async execute(interaction) {
 		const driver = interaction.options.getString('driver');
 		const currency = interaction.options.getString('currency');
 		const amount = interaction.options.getNumber('amount');
@@ -45,12 +45,12 @@ module.exports = {
 							})
 							.setColor("#0398fc")
 							.addFields(
-								{ name: "Old cash amount", value: "`" + Intl.NumberFormat('en-US').format(result[0].cash) + " $`" },
-								{ name: "New cash amount", value: "`" + Intl.NumberFormat('en-US').format(Number(result[0].cash) - Number(amount)) + " $`" },
+								{ name: "Old cash amount", value: "**`" + Intl.NumberFormat('en-US').format(result[0].cash) + " $`**" },
+								{ name: "New cash amount", value: "**`" + Intl.NumberFormat('en-US').format(Number(result[0].cash) + Number(amount)) + " $`**" },
 								{ name: "Cash removed by", value: "<@" + interaction.user.id + ">" })
 							.setFooter({
-								text: client.user.tag,
-								iconURL: client.user.displayAvatarURL()
+								text: interaction.client.user.tag,
+								iconURL: interaction.client.user.displayAvatarURL()
 							})
 							.setTimestamp()
 						interaction.reply({
@@ -66,19 +66,19 @@ module.exports = {
 							})
 							.setColor("#fcba03")
 							.addFields(
-								{ name: "Old speedboost amount", value: "`" + Intl.NumberFormat('en-US').format(result[0].cash) + " SB`" },
-								{ name: "New speedboost amount", value: "`" + Intl.NumberFormat('en-US').format(Number(result[0].cash) - Number(amount)) + " SB`" },
+								{ name: "Old speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(result[0].cash) + " SB`**" },
+								{ name: "New speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(Number(result[0].cash) + Number(amount)) + " SB`**" },
 								{ name: "Speedboost removed by", value: "<@" + interaction.user.id + ">" })
 							.setFooter({
-								text: client.user.tag,
-								iconURL: client.user.displayAvatarURL()
+								text: interaction.client.user.tag,
+								iconURL: interaction.client.user.displayAvatarURL()
 							})
 							.setTimestamp()
 						interaction.reply({
 							embeds: [embed],
 						});
 					})
-			} else interaction.reply({ content: "Couldn't find a driver called **`" + interaction.options.getString('driver') + "`** in database.", ephemeral: true });
+			} else interaction.reply({ content: "Couldn't find a driver called **`" + driver + "`** in database.", ephemeral: true });
 		})
 	},
 };

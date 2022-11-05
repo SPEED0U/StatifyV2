@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('user')
         .setDescription('Provides information about your Discord account.'),
-    async execute(interaction, client) {
+    async execute(interaction) {
         var timestamp = interaction.member.joinedTimestamp
         var date = new Date(timestamp)
         const embed = new EmbedBuilder()
@@ -18,8 +18,8 @@ module.exports = {
                 { name: 'User ID', value: '`' + interaction.user.id + '`' }
             )
             .setFooter({
-                text: client.user.tag,
-                iconURL: client.user.displayAvatarURL()
+                text: interaction.client.user.tag,
+                iconURL: interaction.client.user.displayAvatarURL()
             })
             .setTimestamp()
         interaction.reply({ embeds: [embed] });

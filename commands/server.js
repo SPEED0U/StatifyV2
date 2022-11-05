@@ -5,7 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('server')
         .setDescription('Provides information about the server.'),
-    async execute(interaction, client) {
+    async execute(interaction) {
         var timestamp = interaction.guild.createdTimestamp
         var date = new Date(timestamp)
         const embed = new EmbedBuilder()
@@ -18,8 +18,8 @@ module.exports = {
                 { name: 'Creation date', value: '`' + date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " at " + date.getHours() + ":" + date.getMinutes() + '`', inline: false },
             )
             .setFooter({
-                text: client.user.tag,
-                iconURL: client.user.displayAvatarURL()
+                text: interaction.client.user.tag,
+                iconURL: interaction.client.user.displayAvatarURL()
             })
             .setTimestamp()
         interaction.reply({ embeds: [embed] });
