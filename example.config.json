@@ -1,0 +1,75 @@
+{
+    "bot" : {
+        "clientId" : "",
+        "token" : "",
+        "serverId" : "",
+        "embed" : {
+            "hexColor" : "",
+            "logo" : ""
+        }
+    },
+
+    "channel" : {
+        "announcement" : "",
+        "support" : {
+            "needhelp" : "",
+            "bugreport" : ""
+        },
+        "banlogs" : "",
+        "serverlogs" : "",
+        "status" : "",
+        "command" : {
+            "admin" : "",
+            "moderator" : "",
+            "public" : ""
+        }
+    },
+
+    "role" : {
+        "admin" : "",
+        "moderator" : "",
+        "launcher" : "",
+        "player" : "",
+        "onArrival" : false,
+        "countdown" : 600000
+    },
+
+    "url" : {
+        "website" : "",
+        "pathToProfile" : "",
+        "profileFormat" : "",
+        "avatarFormat" : "",
+        "avatarEndpoint" : "",
+        "modsEndpoint" : ""
+    },
+
+    "core" : {
+        "serverName" : "",
+        "url" : "",
+        "maxPlayerAnnounceLobby" : "",
+        "announceLobbies" : false,
+        "timezone" : "",
+        "token" : {
+            "server" : "",
+            "openfire" : ""
+        },
+        "botPersonaId": 0
+    },
+
+    "sql" : {
+        "host" : "",
+        "user" : "",
+        "password" : "",
+        "database" : ""
+    },
+
+    "antispam" : {
+        "maxDuplicate" : 0,
+        "delay" : 0
+    },
+
+    "antiscam" : {
+        "maxDuplicate" : 0,
+        "delay" : 0
+    }
+}
