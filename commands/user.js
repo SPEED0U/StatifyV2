@@ -19,7 +19,7 @@ module.exports = {
             )
             .setFooter({
                 text: interaction.client.user.tag,
-                iconURL: interaction.client.user.displayAvatarURL() + "?size=64"
+                iconURL: interaction.client.user.displayAvatarURL()
             })
             .setTimestamp()
         interaction.reply({ embeds: [embed] });
