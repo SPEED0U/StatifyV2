@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const { bot } = require('./config.json');
+const config = require('./config.json');
 const commands = [];
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
@@ -26,13 +26,13 @@ for (const file of commandFiles) {
     commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '10' }).setToken(bot.token);
+const rest = new REST({ version: '10' }).setToken(config.bot.token);
 
 (async () => {
     try {
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
         const data = await rest.put(
-            Routes.applicationGuildCommands(bot.clientId, bot.serverId),
+            Routes.applicationGuildCommands(config.bot.clientId, config.bot.serverId),
             { body: commands },
         );
 
@@ -52,4 +52,4 @@ for (const file of commandFiles) {
     }
 }
 
-client.login(bot.token);
+client.login(config.bot.token);

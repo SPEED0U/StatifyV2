@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const settings = require("../config.json");
+const config = require("../config.json");
 const mysql = require('mysql');
-var con = mysql.createConnection(settings.sql);
+var con = mysql.createConnection(config.sql);
 
 module.exports = {
-	allowedRoles: [settings.role.admin, settings.role.moderator],
+	allowedRoles: [config.role.admin, config.role.moderator],
 	data: new SlashCommandBuilder()
 		.setName('give')
 		.setDescription('Give a certain amount of currency to a player.')
@@ -35,13 +35,13 @@ module.exports = {
 		const amount = interaction.options.getNumber('amount');
 		con.query("SELECT ID, cash, boost, iconIndex, name FROM PERSONA WHERE name = ?", [driver], (err, result) => {
 			if (result.length > 0) {
-				var icon = result[0].iconIndex + settings.url.avatarFormat;
+				var icon = result[0].iconIndex + config.url.avatarFormat;
 				if (currency === "cash")
 					con.query("UPDATE PERSONA SET cash = cash + ? WHERE name = ?", [amount, driver], err => {
 						const embed = new EmbedBuilder()
 							.setAuthor({
 								name: result[0].name + " received cash.",
-								iconURL: settings.url.avatarEndpoint + icon
+								iconURL: config.url.avatarEndpoint + icon
 							})
 							.setColor("#0398fc")
 							.addFields(
@@ -62,7 +62,7 @@ module.exports = {
 						const embed = new EmbedBuilder()
 							.setAuthor({
 								name: result[0].name + " received speedboost.",
-								iconURL: settings.url.avatarEndpoint + icon
+								iconURL: config.url.avatarEndpoint + icon
 							})
 							.setColor("#fcba03")
 							.addFields(
