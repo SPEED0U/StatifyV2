@@ -74,7 +74,7 @@ module.exports = {
                                 if (!err) {
                                     const post = new URLSearchParams();
                                     if (duration != undefined) {
-                                        post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR ` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".");
+                                        post.append('message', `TXT_ORANGE,[${result[0].name}] HAS BEEN TEMPORARILY BANNED FOR ` + nosuffix.toUpperCase() + " " + units[durationsuffix].toUpperCase() + ".");
                                     } else {
                                         post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
                                     }
