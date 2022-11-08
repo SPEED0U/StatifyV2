@@ -65,9 +65,9 @@ module.exports = {
                         con.query("SELECT * FROM BAN WHERE user_id = " + userid + " AND active = 1", (err, result1) => {
                             if (result1.length == 0) {
                                 if (duration != undefined) {
-                                    con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, " + convertToIntervalTime(duration) + ", ?, NOW(), ?, ?, 1)", [reason, config.core.botPersonaId, userid], err)
+                                    con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, " + convertToIntervalTime(duration) + ", ?, NOW(), ?, ?, 1)", [reason, config.core.botPersonaId, userid])
                                 } else {
-                                    con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), ?, ?, 1)", [reason, config.core.botPersonaId, userid], err)
+                                    con.query("INSERT INTO `BAN` (`id`, `ends_at`, `reason`, `started`, `banned_by_id`, `user_id`, `active`) VALUES (NULL, NULL, ?, NOW(), ?, ?, 1)", [reason, config.core.botPersonaId, userid])
                                 }
                                 con.query("UPDATE HARDWARE_INFO SET banned = 1 WHERE userId = ? AND hardwareHash = ?", [userid, userInfo[0].ghh]), (err)
                                 axios.post(config.core.url + '/Engine.svc/ofcmdhook?webhook=false&pid=' + config.core.botPersonaId + '&cmd=kick%20' + result[0].name, null, { headers: { Authorization: config.core.token.openfire } }).then(res => { }).catch(error => { })
