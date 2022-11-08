@@ -79,8 +79,8 @@ module.exports = {
                                         post.append('message', `TXT_RED,[${result[0].name}] HAS BEEN PERMANENTLY BANNED.`);
                                     }
                                     post.append('announcementAuth', config.core.token.server);
-                                    const config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
-                                    axios.post(config.core.url + '/Engine.svc/Send/Announcement', post, config)
+                                    const headers = { headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' } };
+                                    axios.post(config.core.url + '/Engine.svc/Send/Announcement', post, headers)
                                     const embed = new EmbedBuilder()
                                     if (duration != undefined) {
                                         embed.setAuthor({
