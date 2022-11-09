@@ -4,7 +4,7 @@ const axios = require('axios');
 const config = require("../config.json");
 const mysql = require('mysql');
 const con = mysql.createConnection(config.sql);
-const channel = bot.channels.cache.get(config.channel.status)
+const channel = bot.channels.cache.get(config.channel.status);
 
 function playersonline() {
     try {
@@ -24,7 +24,6 @@ function serverstatus() {
         if (response.status !== 200 || json.length === 0) {
             throw ''
         }
-
         if (config.core.announceLobbies === true) {
             if (json.onlineNumber <= config.core.maxPlayerAnnounceLobby) {
                 con.query("SELECT value FROM PARAMETER WHERE name = 'SBRWR_INFORM_EVENT'", function (err, paramresult) {
@@ -80,10 +79,6 @@ function serverstatus() {
                     iconURL: bot.user.displayAvatarURL()
                 })
                 .setTimestamp()
-
-            bot.user.setPresence({ activities: [{ name: json.onlineNumber + " players racing", type: ActivityType.Watching, url: config.url.website }], status: 'online' })
-            bot.user.setStatus('online')
-
             channel.messages.fetch({ limit: 1 }).then(messages => {
                 let lastMessage = messages.first()
                 if (lastMessage) {
@@ -92,6 +87,7 @@ function serverstatus() {
                     channel.send({ embeds: [embed] })
                 }
             })
+            bot.user.setPresence({ activities: [{ name: json.onlineNumber + " players racing", type: ActivityType.Watching, url: config.url.website }], status: 'online' })
         });
     }).catch(() => {
         bot.guilds.fetch(config.bot.serverId).then(guild => {
@@ -125,8 +121,7 @@ function serverstatus() {
                     channel.send({ embeds: [embed] })
                 }
             })
-        });
-
+        })
         bot.user.setPresence({ activities: [{ name: "watching players complain because they don't read #📰-announcements.", type: ActivityType.Watching }], status: 'dnd' })
     })
 }
