@@ -9,8 +9,10 @@ client.commands = new Collection();
 
 const eventsPath = path.join(__dirname, 'events');
 const commandsPath = path.join(__dirname, 'commands');
+const scriptsPath = path.join(__dirname, 'scripts');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const scriptFiles = fs.readdirSync(scriptsPath).filter(file => file.endsWith('.js'));
 
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
@@ -25,7 +27,10 @@ for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     commands.push(command.data.toJSON());
 }
-
+for (const file of scriptFiles) {
+    require(`./scripts/${file}`);
+    console.log(`Started the execution of ${scriptFiles.length} scripts.`);
+}
 const rest = new REST({ version: '10' }).setToken(config.bot.token);
 
 (async () => {
