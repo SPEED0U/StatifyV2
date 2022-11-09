@@ -184,35 +184,36 @@ module.exports = {
                 }
             } else {
                 interaction.reply({ content: "You have to specify the type of your value with **`add`** or **`remove`** choices.", ephemeral: true });
-            }
-            const embed = new EmbedBuilder()
-                .setAuthor({
-                    name: "New launcher settings",
-                    iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/60/twitter/53/hammer-and-wrench_1f6e0.png"
+            } if (add != undefined || remove != undefined) {
+                const embed = new EmbedBuilder()
+                    .setAuthor({
+                        name: "New launcher settings",
+                        iconURL: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/60/twitter/53/hammer-and-wrench_1f6e0.png"
+                    })
+                    .setColor("#b2c6d1")
+                if (add != undefined) {
+                    if (add == "sha") {
+                        embed.addFields({ name: "🆔 Added SHA", value: "**`" + value.toUpperCase() + "`**" })
+                    } else if (add == "hwid") {
+                        embed.addFields({ name: "🆔 Added HWID", value: "**`" + value.toUpperCase() + "`**" })
+                    }
+                } if (remove != undefined) {
+                    if (remove == "sha") {
+                        embed.addFields({ name: "🆔 Removed SHA", value: "**`" + value.toUpperCase() + "`**" })
+                    } else if (add == "hwid") {
+                        embed.addFields({ name: "🆔 Removed HWID", value: "**`" + value.toUpperCase() + "`**" })
+                    }
+                }
+                embed.addFields({ name: "** **", value: "To apply the new settings please use `/settings apply`." })
+                embed.setFooter({
+                    text: interaction.client.user.tag,
+                    iconURL: interaction.client.user.displayAvatarURL()
                 })
-                .setColor("#b2c6d1")
-            if (add != undefined) {
-                if (add == "sha") {
-                    embed.addFields({ name: "🆔 Added SHA", value: "**`" + value.toUpperCase() + "`**" })
-                } else if (add == "hwid") {
-                    embed.addFields({ name: "🆔 Added HWID", value: "**`" + value.toUpperCase() + "`**" })
-                }
-            } if (remove != undefined) {
-                if (remove == "sha") {
-                    embed.addFields({ name: "🆔 Removed SHA", value: "**`" + value.toUpperCase() + "`**" })
-                } else if (add == "hwid") {
-                    embed.addFields({ name: "🆔 Removed HWID", value: "**`" + value.toUpperCase() + "`**" })
-                }
+                    .setTimestamp()
+                interaction.reply({
+                    embeds: [embed],
+                });
             }
-            embed.addFields({ name: "** **", value: "To apply the new settings please use `/settings apply`." })
-            embed.setFooter({
-                text: interaction.client.user.tag,
-                iconURL: interaction.client.user.displayAvatarURL()
-            })
-                .setTimestamp()
-            interaction.reply({
-                embeds: [embed],
-            });
         }
     },
 };
