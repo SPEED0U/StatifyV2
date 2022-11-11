@@ -2,12 +2,7 @@ const { Events } = require('discord.js');
 const config = require("../config.json");
 let users = {}
 
-module.exports = {
-    name: Events.MessageCreate,
-    execute(message, client) {
-        antispamscam(message, client)
-    }
-};
+antispamscam(message, client)
 
 function antispamscam(message, client) {
     if (message.content.length > 0) {

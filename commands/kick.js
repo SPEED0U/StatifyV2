@@ -1,9 +1,8 @@
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require("../config.json");
-const mysql = require('mysql');
 const axios = require('axios');
-var con = mysql.createConnection(config.sql);
+var con = require('../mysql');
 
 module.exports = {
     allowedRoles: [config.role.admin, config.role.moderator],

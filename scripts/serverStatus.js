@@ -2,8 +2,7 @@ const { EmbedBuilder, ActivityType } = require('discord.js');
 const CronJob = require('cron').CronJob;
 const axios = require('axios');
 const config = require("../config.json");
-const mysql = require('mysql');
-const con = mysql.createConnection(config.sql);
+var con = require('../mysql');
 const channel = bot.channels.cache.get(config.channel.status);
 
 function playersonline() {

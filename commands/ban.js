@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require("../config.json");
 const mysql = require('mysql');
 const axios = require('axios');
-var con = mysql.createConnection(config.sql);
+var con = require('../mysql');
 
 function convertToIntervalTime(date) {
     var suffix = date.split('').pop();
