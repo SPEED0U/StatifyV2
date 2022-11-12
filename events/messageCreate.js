@@ -30,8 +30,8 @@ function antispamscam(message, client) {
                         })
                         .setColor("#ff0000")
                         .addFields(
-                            { name: "Spamming the following text", value: "```" + message.content + "```"},
-                            { name: "Discord user id", value: "`" + message.author.id + "`"}
+                            { name: "Spamming the following text", value: "```" + message.content + "```" },
+                            { name: "Discord user id", value: "`" + message.author.id + "`" }
                         )
                         .setFooter({
                             text: client.user.tag,

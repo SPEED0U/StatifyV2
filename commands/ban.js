@@ -1,9 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require("../config.json");
-const mysql = require('mysql');
 const axios = require('axios');
-var con = require('../mysql');
 
 function convertToIntervalTime(date) {
     var suffix = date.split('').pop();

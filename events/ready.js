@@ -11,8 +11,8 @@ module.exports = {
         const scriptsFiles = fs.readdirSync(scriptsPath).filter(file => file.endsWith('.js'));
         for (const file of scriptsFiles) {
             require(`../scripts/${file}`);
+            console.log(`[BOT] Started executing ${scriptsFiles.length} scripts.`);
         }
-
-        console.log(`Ready! Logged in as ${client.user.tag}`);
+        console.log(`[BOT] I'm ready to rumble, connected as ${client.user.tag}.`);
     },
 };

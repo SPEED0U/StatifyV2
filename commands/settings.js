@@ -2,7 +2,6 @@ const { EmbedBuilder } = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require("../config.json");
 const axios = require('axios')
-var con = require('../mysql');
 
 module.exports = {
     allowedRoles: [config.role.admin, config.role.launcher, config.role.moderator],
@@ -88,7 +87,7 @@ module.exports = {
         const mapsc = interaction.options.getString('mapscenery')
         const add = interaction.options.getString('add')
         const remove = interaction.options.getString('remove')
-        const value = interaction.options.getString('value').toUpperCase()
+        const value = interaction.options.getString('value')
 
         if (subc === "apply") {
             axios.post(config.core.url + '/Engine.svc/ReloadParameters', "adminAuth=" + config.core.token.server, null).then(() => {
