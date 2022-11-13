@@ -30,7 +30,7 @@ module.exports = {
                         con.query("SELECT * FROM HARDWARE_INFO WHERE userId = ? AND hardwareHash = ? AND banned = 1", [userid, userInfo[0].ghh], (err, result2) => {
                             if (result1.length > 0 || result2.length > 0) {
                                 con.query("UPDATE BAN SET active = 0 WHERE user_id = ?", [userid]); {
-                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE userId = ? AND hardwareHash = ?", [userid, userInfo[0].ghh])
+                                    con.query("UPDATE HARDWARE_INFO SET banned = 0 WHERE hardwareHash = ?", [userInfo[0].ghh])
                                     con.query("UPDATE USER SET isLocked = 0 WHERE ID = ?", [userid])
                                     const embed = new EmbedBuilder()
                                         .setAuthor({
