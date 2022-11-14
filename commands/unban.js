@@ -54,14 +54,14 @@ module.exports = {
                                 }
                                 con.query("SELECT email, ID, isLocked FROM USER WHERE gameHardwareHash = ?", [userInfo[0].ghh], (err, otherAcc) => {
                                     if (otherAcc.length > 1) {
-                                        const embed = new EmbedBuilder()
+                                        const embed1 = new EmbedBuilder()
                                             .setAuthor({
                                                 name: result[0].name + " is also hardware banned on the following accounts :arrow_heading_down:",
                                                 iconURL: config.url.avatarEndpoint + icon
                                             })
-                                        message.channel.send({ embeds: [embed] })
+                                        message.channel.send({ embeds: [embed1] })
                                         otherAcc.forEach(acc => {
-                                            const embed = new EmbedBuilder()
+                                            const embed2 = new EmbedBuilder()
                                                 .setColor("#ff0000")
                                                 .addFields(
                                                     { name: "📧 Email", value: "**`" + acc.emai + "`**" },
@@ -73,7 +73,7 @@ module.exports = {
                                                     iconURL: interaction.client.user.displayAvatarURL()
                                                 })
                                                 .setTimestamp()
-                                            interaction.message.channel.send({ embeds: [embed] })
+                                            interaction.message.channel.send({ embeds: [embed2] })
                                         })
                                     }
                                 })
