@@ -64,8 +64,8 @@ module.exports = {
 							})
 							.setColor("#fcba03")
 							.addFields(
-								{ name: "Old speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(result[0].cash) + " SB`**" },
-								{ name: "New speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(Number(result[0].cash) + Number(amount)) + " SB`**" },
+								{ name: "Old speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(result[0].boost) + " SB`**" },
+								{ name: "New speedboost amount", value: "**`" + Intl.NumberFormat('en-US').format(Number(result[0].boost) + Number(amount)) + " SB`**" },
 								{ name: "Speedboost removed by", value: "<@" + interaction.user.id + ">" })
 							.setFooter({
 								text: interaction.client.user.tag,
