@@ -56,9 +56,9 @@ module.exports = {
                                     if (otherAcc.length > 1) {
                                         const embed1 = new EmbedBuilder()
                                             .setAuthor({
-                                                name: result[0].name + " is also hardware banned on the following accounts :arrow_heading_down:",
                                                 iconURL: config.url.avatarEndpoint + icon
                                             })
+                                            .setDescription(result[0].name + " is also hardware banned on the following accounts :arrow_heading_down:")
                                         message.channel.send({ embeds: [embed1] })
                                         otherAcc.forEach(acc => {
                                             const embed2 = new EmbedBuilder()
