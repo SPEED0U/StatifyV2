@@ -38,57 +38,66 @@ module.exports = {
             con.query("SELECT id, curCarIndex, iconIndex, name FROM PERSONA WHERE name = ?", driver, (err, result) => {
                 if (result.length > 0) {
                     var persona = result[0].id;
-                    var carindex = result[0].iconIndex + config.url.avatarFormat
-                    var icon = result[0].iconIndex + ".jpg";
+                    var carindex = result[0].curCarIndex;
+                    var icon = result[0].iconIndex + config.url.avatarFormat
                     con.query("SELECT id FROM CAR WHERE personaId = ? LIMIT ?,1;", [persona, carindex], (err2, result2) => {
                         if (carid != undefined) {
-                            con.query("DELETE FROM VINYL WHERE carId = ?", carid, (err3, result3) => {
-                                if (!err3) {
-                                    const embed = new EmbedBuilder()
-                                        embed.setAuthor({
-                                            name: result[0].name + " has lost a livery",
-                                            iconURL: config.url.avatarEndpoint + icon
-                                        })
-                                        embed.setColor("#ff0000")
-                                    if (reason != undefined) {
-                                        embed.addFields({ name: "📃 Reason", value: reason })
-                                    }
-                                    embed.addFields({ name: "👮 Livery removed by", value: "<@" + interaction.user.id + ">" })
-                                        .setFooter({
-                                            text: interaction.client.user.tag,
-                                            iconURL: interaction.client.user.displayAvatarURL()
-                                        })
-                                        .setTimestamp()
-                                    interaction.client.channels.cache.get(config.channel.banlogs).send({ embeds: [embed] })
-                                    interaction.reply({
-                                        embeds: [embed],
-                                    });
+                            con.query("SELECT id FROM VINYL WHERE carId = ?", result2[0].id, (err3, result3) => {
+                                if (result3 != undefined) {
+                                    con.query("DELETE FROM VINYL WHERE carId = ?", carid, (err4, result4) => {
+                                        if (!err3) {
+                                            const embed = new EmbedBuilder()
+                                                embed.setAuthor({
+                                                    name: result[0].name + " has lost a livery",
+                                                    iconURL: config.url.avatarEndpoint + icon
+                                                })
+                                                embed.setColor("#ff0000")
+                                            if (reason != undefined) {
+                                                embed.addFields({ name: "📃 Reason", value: reason })
+                                            }
+                                            embed.addFields({ name: "👮 Livery removed by", value: "<@" + interaction.user.id + ">" })
+                                                .setFooter({
+                                                    text: interaction.client.user.tag,
+                                                    iconURL: interaction.client.user.displayAvatarURL()
+                                                })
+                                                .setTimestamp()
+                                            interaction.client.channels.cache.get(config.channel.banlogs).send({ embeds: [embed] })
+                                            interaction.reply({
+                                                embeds: [embed],
+                                            });
+                                        }
+                                    })
                                 }
                             })
                         } else {
-                            con.query("DELETE FROM VINYL WHERE carId = ?", result2[0].id, (err4, result4) => {
-                                if (!err4) {
-                                    const embed = new EmbedBuilder()
-                                        embed.setAuthor({
-                                            name: result[0].name + " has lost a livery",
-                                            iconURL: config.url.avatarEndpoint + icon
-                                        })
-                                        embed.setColor("#ff0000")
-                                    if (reason != undefined) {
-                                        embed.addFields({ name: "📃 Reason", value: reason })
-                                    }
-                                    embed.addFields({ name: "👮 Livery removed by", value: "<@" + interaction.user.id + ">" })
-                                        .setFooter({
-                                            text: interaction.client.user.tag,
-                                            iconURL: interaction.client.user.displayAvatarURL()
-                                        })
-                                        .setTimestamp()
-                                    interaction.client.channels.cache.get(config.channel.banlogs).send({ embeds: [embed] })
-                                    interaction.reply({
-                                        embeds: [embed],
-                                    });
+                            con.query("SELECT id FROM VINYL WHERE carId = ?", result2[0].id, (err5, result5) => {
+                                if (result5 != undefined) {
+                                    con.query("DELETE FROM VINYL WHERE carId = ?", result2[0].id, (err6, result6) => {
+                                        if (!err5) {
+                                            const embed = new EmbedBuilder()
+                                                embed.setAuthor({
+                                                    name: result[0].name + " has lost a livery",
+                                                    iconURL: config.url.avatarEndpoint + icon
+                                                })
+                                                embed.setColor("#ff0000")
+                                            if (reason != undefined) {
+                                                embed.addFields({ name: "📃 Reason", value: reason })
+                                            }
+                                            embed.addFields({ name: "👮 Livery removed by", value: "<@" + interaction.user.id + ">" })
+                                                .setFooter({
+                                                    text: interaction.client.user.tag,
+                                                    iconURL: interaction.client.user.displayAvatarURL()
+                                                })
+                                                .setTimestamp()
+                                            interaction.client.channels.cache.get(config.channel.banlogs).send({ embeds: [embed] })
+                                            interaction.reply({
+                                                embeds: [embed],
+                                            });
+                                        }
+                                    })
                                 }
                             })
+                                
                         }
                     })
                 } else {
