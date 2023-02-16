@@ -34,13 +34,14 @@ module.exports = {
         const carid = interaction.options.getString('carid');
         const reason = interaction.options.getString('reason');
 
-        if (subc === remove) {
-            con.query("SELECT id, curCarIndex FROM PERSONA WHERE name = ?", driver, (err, result) => {
+        if (subc === 'remove') {
+            con.query("SELECT id, curCarIndex, iconIndex, name FROM PERSONA WHERE name = ?", driver, (err, result) => {
                 if (result.length > 0) {
                     var persona = result[0].id;
-                    var carindex = result[0].curCarIndex;
+                    var carindex = result[0].iconIndex + config.url.avatarFormat
+                    var icon = result[0].iconIndex + ".jpg";
                     con.query("SELECT id FROM CAR WHERE personaId = ? LIMIT ?,1;", [persona, carindex], (err2, result2) => {
-                        if (carid.length > 0) {
+                        if (carid != undefined) {
                             con.query("DELETE FROM VINYL WHERE carId = ?", carid, (err3, result3) => {
                                 if (!err3) {
                                     const embed = new EmbedBuilder()
@@ -65,8 +66,8 @@ module.exports = {
                                 }
                             })
                         } else {
-                            con.query("DELETE FROM VINYL WHERE carId = ?", carindex, (err3, result3) => {
-                                if (!err3) {
+                            con.query("DELETE FROM VINYL WHERE carId = ?", result2[0].id, (err4, result4) => {
+                                if (!err4) {
                                     const embed = new EmbedBuilder()
                                         embed.setAuthor({
                                             name: result[0].name + " has lost a livery",
