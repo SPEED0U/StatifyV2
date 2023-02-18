@@ -47,11 +47,11 @@ module.exports = {
                                     con.query("DELETE FROM VINYL WHERE carId = ?", carid, (err4, result4) => {
                                         if (!err3) {
                                             const embed = new EmbedBuilder()
-                                                embed.setAuthor({
-                                                    name: result[0].name + " has lost a livery",
-                                                    iconURL: config.url.avatarEndpoint + icon
-                                                })
-                                                embed.setColor("#ff0000")
+                                            embed.setAuthor({
+                                                name: result[0].name + " has lost a livery",
+                                                iconURL: config.url.avatarEndpoint + icon
+                                            })
+                                            embed.setColor("#ff0000")
                                             if (reason != undefined) {
                                                 embed.addFields({ name: "📃 Reason", value: reason })
                                             }
@@ -75,11 +75,11 @@ module.exports = {
                                     con.query("DELETE FROM VINYL WHERE carId = ?", result2[0].id, (err6, result6) => {
                                         if (!err5) {
                                             const embed = new EmbedBuilder()
-                                                embed.setAuthor({
-                                                    name: result[0].name + " has lost a livery",
-                                                    iconURL: config.url.avatarEndpoint + icon
-                                                })
-                                                embed.setColor("#ff0000")
+                                            embed.setAuthor({
+                                                name: result[0].name + " has lost a livery",
+                                                iconURL: config.url.avatarEndpoint + icon
+                                            })
+                                            embed.setColor("#ff0000")
                                             if (reason != undefined) {
                                                 embed.addFields({ name: "📃 Reason", value: reason })
                                             }
@@ -97,15 +97,12 @@ module.exports = {
                                     })
                                 }
                             })
-                                
                         }
                     })
                 } else {
                     interaction.reply({ content: "Couldn't find a driver called **`" + driver + "`** in database.", ephemeral: true });
                 }
-
             })
-            
         }
     }
 }
