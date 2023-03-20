@@ -21,7 +21,7 @@ module.exports = {
 				.setName('target')
 				.setDescription('Who is the target?')
 				.setRequired(true)),
-		
+
 
 	async execute(interaction) {
 		const type = interaction.options.getString('type');
@@ -44,7 +44,7 @@ module.exports = {
 								iconURL: config.url.avatarEndpoint + "26.jpg"
 							})
 						}
-							embed.setColor("#fff700")
+						embed.setColor("#fff700")
 							.addFields({ name: "👮 Locked by", value: "<@" + interaction.user.id + ">" })
 							.setFooter({
 								text: interaction.client.user.tag,
@@ -57,31 +57,33 @@ module.exports = {
 					}
 					)
 				} else interaction.reply({ content: "Couldn't find the email **`" + target + "`** in database.", ephemeral: true });
-			} 
-		)}
+			}
+			)
+		}
 
 		if (type === 'driver') {
 			con.query("SELECT USERID, name, iconIndex FROM PERSONA WHERE name = ?", target, (err, result) => {
 				if (result.length > 0) {
-						con.query("UPDATE USER SET isLocked = 1 WHERE ID = ?", result[0].USERID)
-						var icon = result[0].iconIndex + config.url.avatarFormat
-						const embed = new EmbedBuilder()
-							.setAuthor({
-								name: "The account attached to " + result[0].name + " has been locked.",
-								iconURL: config.url.avatarEndpoint + icon
-							})
-							.setColor("#fff700")
-							.addFields({ name: "👮 Locked by", value: "<@" + interaction.user.id + ">" })
-							.setFooter({
-								text: interaction.client.user.tag,
-								iconURL: interaction.client.user.displayAvatarURL()
-							})
-							.setTimestamp()
-						interaction.reply({
-							embeds: [embed],
-						});
+					con.query("UPDATE USER SET isLocked = 1 WHERE ID = ?", result[0].USERID)
+					var icon = result[0].iconIndex + config.url.avatarFormat
+					const embed = new EmbedBuilder()
+						.setAuthor({
+							name: "The account attached to " + result[0].name + " has been locked.",
+							iconURL: config.url.avatarEndpoint + icon
+						})
+						.setColor("#fff700")
+						.addFields({ name: "👮 Locked by", value: "<@" + interaction.user.id + ">" })
+						.setFooter({
+							text: interaction.client.user.tag,
+							iconURL: interaction.client.user.displayAvatarURL()
+						})
+						.setTimestamp()
+					interaction.reply({
+						embeds: [embed],
+					});
 				} else interaction.reply({ content: "Couldn't find a driver called **`" + target + "`** in database.", ephemeral: true });
-			} 
-		)}
+			}
+			)
+		}
 	},
 };
