@@ -23,7 +23,8 @@ module.exports = {
         const reason = interaction.options.getString('reason');
         con.query("SELECT USERID, name, iconIndex FROM PERSONA WHERE name = ?", driver, (err, result) => {
             if (result.length > 0) {
-                var userid = result[0].USERID;
+                var userid = result[0].USERID
+                var pname = result[0].name
                 var icon = result[0].iconIndex + config.url.avatarFormat
                 con.query("SELECT gameHardwareHash AS ghh FROM USER WHERE ID = ?", [userid], (err, userInfo) =>
                     con.query("SELECT * FROM BAN WHERE user_id = ? AND active = 1", [userid], (err, result1) =>
@@ -34,7 +35,7 @@ module.exports = {
                                     con.query("UPDATE USER SET isLocked = 0 WHERE ID = ?", [userid])
                                     const embed = new EmbedBuilder()
                                         .setAuthor({
-                                            name: result[0].name + " has been unbanned.",
+                                            name: pname + " has been unbanned.",
                                             iconURL: config.url.avatarEndpoint + icon
                                         })
                                         .setColor("#11ff00")
