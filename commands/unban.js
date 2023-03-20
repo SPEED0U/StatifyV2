@@ -65,7 +65,7 @@ module.exports = {
                                             const embed2 = new EmbedBuilder()
                                                 .setColor("#ff0000")
                                                 .addFields(
-                                                    { name: "📧 Email", value: "**`" + acc.emai + "`**" },
+                                                    { name: "📧 Email", value: "**`" + acc.email + "`**" },
                                                     { name: "🪪 User ID", value: "**`" + acc.ID + "`**" },
                                                     { name: "🔐 Account state", value: acc.isLocked == 1 ? "`Locked`" : "`Unlocked`" }
                                                 )
