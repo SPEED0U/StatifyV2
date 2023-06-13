@@ -31,6 +31,7 @@ function connectDatabase() {
     }
     return sql;
 }
+
 global["con"] = connectDatabase()
 
 client.commands = new Collection();
